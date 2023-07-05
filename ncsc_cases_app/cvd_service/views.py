@@ -44,7 +44,7 @@ class CVDCreateView(generic.CreateView):
     model = CvdReport
     fields = ['officer', 'first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
               'explanation', 'vulnerability_reason', 'domain_or_ip', 'pgp_key']
-    template_name = 'cases_service/create_case.html'
+    template_name = 'cvd_service/create_cvd.html'
     success_url = reverse_lazy('cvd_service:cvd_list')
 
 
