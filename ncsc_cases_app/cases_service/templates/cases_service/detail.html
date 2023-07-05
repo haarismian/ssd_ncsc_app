@@ -1,3 +1,4 @@
+{% comment %}
 <form action="{% url 'cases:vote' question.id %}" method="post">
   {% csrf_token %}
   <fieldset>
@@ -17,3 +18,4 @@
   </fieldset>
   <input type="submit" value="Vote" />
 </form>
+{% endcomment %}

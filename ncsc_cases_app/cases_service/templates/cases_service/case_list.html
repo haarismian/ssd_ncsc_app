@@ -4,7 +4,7 @@
     <title>Case List</title>
   </head>
   <body>
-    <a href="{% url 'cases:create_case' %}">Create New Case</a>
+    <a href="{% url 'cases_service:create_case' %}">Create New Case</a>
 
     <h1>Case List</h1>
     <ul>
@@ -15,7 +15,10 @@
         <p>Created by User ID: {{ case.user_id }}</p>
 
         <!-- This form should be inside the loop and the <li> -->
-        <form method="POST" action="{% url 'cases:delete_case' case.id %}">
+        <form
+          method="POST"
+          action="{% url 'cases_service:delete_case' case.id %}"
+        >
           {% csrf_token %}
           <input type="submit" value="Delete Case" />
         </form>

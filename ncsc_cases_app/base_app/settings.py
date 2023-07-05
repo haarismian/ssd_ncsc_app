@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "cases_service.apps.NcscCasesApplicationConfig",
     "cvd_service.apps.NcscCvdConfig",
+    "base_app",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ncsc_cases_app.urls'
+ROOT_URLCONF = 'base_app.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ncsc_cases_app.wsgi.application'
+WSGI_APPLICATION = 'base_app.wsgi.application'
 
 
 # Database
