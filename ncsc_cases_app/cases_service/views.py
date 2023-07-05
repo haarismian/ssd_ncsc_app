@@ -25,7 +25,7 @@ class CaseCreateView(CreateView):
     model = Case
     fields = ['title', 'description']
     template_name = 'cases_service/create_case.html'
-    success_url = reverse_lazy('cases:case_list')
+    success_url = reverse_lazy('cases_service:case_list')
 
 
 # class DetailView(generic.DetailView):
@@ -43,4 +43,4 @@ class CaseCreateView(CreateView):
 def delete_case(request, id):
     case = Case.objects.get(id=id)
     case.delete()
-    return redirect('cases:case_list')  # name of your case list URL
+    return redirect('cases_service:case_list')  # name of your case list URL

@@ -2,11 +2,6 @@ from django.db import models
 
 
 class CvdReport(models.Model):
-    officer = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=100, blank=True, null=True)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
 
     VULNERABILITY_TYPES = (
         ('injection', 'Injection'),
@@ -21,6 +16,12 @@ class CvdReport(models.Model):
         ('integrity', 'Integrity'),
         ('confidentiality', 'Confidentiality'),
     )
+
+    officer = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
     vulnerability_type = models.CharField(
         max_length=30, choices=VULNERABILITY_TYPES)
     explanation = models.TextField()

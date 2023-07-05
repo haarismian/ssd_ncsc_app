@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "cases_service.apps.NcscCasesApplicationConfig",
-    "ncsc_cvd.apps.NcscCvdConfig",
+    "cvd_service.apps.NcscCvdConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

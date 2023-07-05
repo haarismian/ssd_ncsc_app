@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CVD Report List</title>
+  </head>
+  <body>
+    <h1>CVD Report List</h1>
+    <table>
+      <tr>
+        <th>Officer</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Vulnerability Type</th>
+        <th>Explanation</th>
+        <th>Reason</th>
+        <th>Domain/IP</th>
+        <th>PGP Key</th>
+      </tr>
+      {% for cvd in cvd_list %}
+      <tr>
+        <td>{{ cvd.officer }}</td>
+        <td>{{ cvd.first_name }}</td>
+        <td>{{ cvd.last_name }}</td>
+        <td>{{ cvd.email }}</td>
+        <td>{{ cvd.phone }}</td>
+        <td>{{ cvd.vulnerability_type }}</td>
+        <td>{{ cvd.explanation }}</td>
+        <td>{{ cvd.vulnerability_reason }}</td>
+        <td>{{ cvd.domain_or_ip }}</td>
+        <td>{{ cvd.pgp_key }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
