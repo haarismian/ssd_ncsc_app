@@ -8,7 +8,7 @@ from .models import Question, Choice
 
 
 class IndexView(generic.ListView):
-    template_name = "ncsc_cases/index.html"
+    template_name = "cases_service/index.html"
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
@@ -23,7 +23,7 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Question
-    template_name = "ncsc_cases/detail.html"
+    template_name = "cases_service/detail.html"
 
     def get_queryset(self):
         """
@@ -34,7 +34,7 @@ class DetailView(generic.DetailView):
 
 class ResultsView(generic.DetailView):
     model = Question
-    template_name = "ncsc_cases/results.html"
+    template_name = "cases_service/results.html"
 
 
 def vote(request, question_id):
