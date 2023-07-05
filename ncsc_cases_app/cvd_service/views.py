@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
 from django.urls import reverse_lazy
@@ -34,6 +34,12 @@ class CVDListView(generic.ListView):
         return CvdReport.objects.all()
 
 
+class CVDDetailView(generic.DetailView):
+    model = CvdReport
+    # Update with your actual detail template
+    template_name = 'cvd_service/cvd_detail.html'
+
+
 class CVDCreateView(generic.CreateView):
     model = CvdReport
     fields = ['officer', 'first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
@@ -54,7 +60,7 @@ class CVDCreateView(generic.CreateView):
 
 
 @require_POST
-def delete_cvd(request, id):
-    case = CvdReport.objects.get(id=id)
-    case.delete()
-    return redirect('cvd_service:cvd_list')  # name of your cvd list URL
+def delete_cvd(request, pk):
+    cvd = get_object_or_404(CvdReport, pk=pk)
+    cvd.delete()
+    return redirect('cvd_service:cvd_list')

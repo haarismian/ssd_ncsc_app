@@ -20,7 +20,12 @@
       </tr>
       {% for cvd in cvd_list %}
       <tr>
-        <td>{{ cvd.officer }}</td>
+        <td>
+          <a href="{% url 'cvd_service:cvd_detail' cvd.id %}"
+            >{{ cvd.officer }}</a
+          >
+        </td>
+
         <td>{{ cvd.first_name }}</td>
         <td>{{ cvd.last_name }}</td>
         <td>{{ cvd.email }}</td>
@@ -31,6 +36,7 @@
         <td>{{ cvd.domain_or_ip }}</td>
         <td>{{ cvd.pgp_key }}</td>
       </tr>
+
       {% endfor %}
     </table>
   </body>

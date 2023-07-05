@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CVD Detail</title>
+  </head>
+  <body>
+    <h1>CVD Detail</h1>
+    <p>Officer: {{ object.officer }}</p>
+    <p>First Name: {{ object.first_name }}</p>
+    <p>Last Name: {{ object.last_name }}</p>
+    <p>Email: {{ object.email }}</p>
+    <p>Phone: {{ object.phone }}</p>
+    <p>Vulnerability Type: {{ object.get_vulnerability_type_display }}</p>
+    <p>Explanation: {{ object.explanation }}</p>
+    <p>Vulnerability Reason: {{ object.vulnerability_reason }}</p>
+    <p>Domain or IP: {{ object.domain_or_ip }}</p>
+    <p>PGP Key: {{ object.pgp_key }}</p>
+
+    <!-- Delete Button -->
+    <form action="{% url 'cvd_service:delete_cvd' object.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit">Delete</button>
+    </form>
+  </body>
+</html>
