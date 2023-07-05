@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "ncsc_cases_application.apps.NcscCasesApplicationConfig",
+    "ncsc_cvd.apps.NcscCvdConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
