@@ -4,6 +4,8 @@
     <title>Case List</title>
   </head>
   <body>
+    <a href="{% url 'cases:create_case' %}">Create New Case</a>
+
     <h1>Case List</h1>
     <ul>
       {% for case in cases %}
