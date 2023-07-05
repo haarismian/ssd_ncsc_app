@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Case List</title>
+  </head>
+  <body>
+    <h1>Case List</h1>
+    <ul>
+      {% for case in cases %}
+      <li>
+        {{ case.title }} (Case ID: {{ case.id }})
+        <p>Description: {{ case.description }}</p>
+        <p>Created by User ID: {{ case.user_id }}</p>
+
+        <!-- This form should be inside the loop and the <li> -->
+        <form method="POST" action="{% url 'cases:delete_case' case.id %}">
+          {% csrf_token %}
+          <input type="submit" value="Delete Case" />
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
