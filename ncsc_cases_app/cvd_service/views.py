@@ -43,7 +43,7 @@ class CVDDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'cvd_service/cvd_detail.html'
 
 
-class CVDCreateView(LoginRequiredMixin, generic.CreateView):
+class CVDCreateView(generic.CreateView):
     model = CvdReport
     fields = ['officer', 'first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
               'explanation', 'vulnerability_reason', 'domain_or_ip', 'pgp_key']

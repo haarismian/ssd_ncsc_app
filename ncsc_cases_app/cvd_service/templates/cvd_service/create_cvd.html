@@ -1,9 +1,153 @@
 {% extends 'base_app/base.html' %} {% block title %}Create CVD{% endblock %}
 {%block content %}
+<div class="flex flex-col items-center justify-center h-screen bg-gray-100">
+  <h1 class="text-4xl font-bold mb-4">Create CVD</h1>
 
-<form method="POST">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Create</button>
-</form>
+  <form class="bg-white w-full rounded-lg shadow-lg p-8" method="POST">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2 w-full"
+        for="id_officer"
+        >Officer</label
+      >
+      <input
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_officer"
+        type="text"
+        name="officer"
+        placeholder="Enter officer"
+      />
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="id_first_name"
+        >First Name</label
+      >
+      <input
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_first_name"
+        type="text"
+        name="first_name"
+        placeholder="Enter first name"
+      />
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="id_last_name"
+        >Last Name</label
+      >
+      <input
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_last_name"
+        type="text"
+        name="last_name"
+        placeholder="Enter last name"
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="id_email"
+        >Email</label
+      >
+      <input
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_email"
+        type="email"
+        name="email"
+        placeholder="Enter email"
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="id_phone"
+        >Phone</label
+      >
+      <input
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_phone"
+        type="text"
+        name="phone"
+        placeholder="Enter phone"
+      />
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="id_vulnerability_type"
+        >Vulnerability Type</label
+      >
+      <select
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_vulnerability_type"
+        name="vulnerability_type"
+      >
+        {% for choice in form.vulnerability_type.field.choices %}
+        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="id_explanation"
+        >Explanation</label
+      >
+      <textarea
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_explanation"
+        name="explanation"
+        rows="5"
+        placeholder="Enter explanation"
+      ></textarea>
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="id_vulnerability_reason"
+        >Vulnerability Reason</label
+      >
+      <textarea
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_vulnerability_reason"
+        name="vulnerability_reason"
+        rows="5"
+        placeholder="Enter vulnerability reason"
+      ></textarea>
+    </div>
+    <div class="mb-4">
+      <label
+        class="block text-gray-700 text-sm font-bold mb-2"
+        for="id_domain_or_ip"
+        >Domain or IP</label
+      >
+      <textarea
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_domain_or_ip"
+        name="domain_or_ip"
+        rows="5"
+        placeholder="Enter domain or IP"
+      ></textarea>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="id_pgp_key"
+        >PGP Key</label
+      >
+      <textarea
+        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        id="id_pgp_key"
+        name="pgp_key"
+        rows="5"
+        placeholder="Enter PGP key"
+      ></textarea>
+    </div>
 
+    <button
+      type="submit"
+      class="mt-4 bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-500"
+    >
+      Create
+    </button>
+  </form>
+</div>
 {% endblock %}
