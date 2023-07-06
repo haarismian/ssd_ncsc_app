@@ -75,7 +75,7 @@
             {% else %}
             <li>
               <a
-                href="{% url 'cvd_service:cvd_list' %}"
+                href="{% url 'cvd_service:create_cvd' %}"
                 class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
                 aria-current="page"
                 >Submit CVD Report</a
@@ -99,7 +99,9 @@
       </div>
     </nav>
 
-    <main class="container mx-auto">{% block content %} {% endblock %}</main>
+    <main class="container mx-auto pt-12">
+      {% block content %} {% endblock %}
+    </main>
 
     <footer>
       <!-- Add your footer content here -->
