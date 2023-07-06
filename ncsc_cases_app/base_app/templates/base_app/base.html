@@ -57,6 +57,7 @@
                 >Home</a
               >
             </li>
+            {% if user.is_authenticated %}
             <li>
               <a
                 href="{% url 'cvd_service:cvd_list' %}"
@@ -73,7 +74,24 @@
                 >Cases module</a
               >
             </li>
-            {% if user.is_authenticated %}
+            {% else %}
+            <li>
+              <a
+                href="{% url 'cvd_service:cvd_list' %}"
+                class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                aria-current="page"
+                >Submit CVD Report</a
+              >
+            </li>
+            <li>
+              <a
+                href="{% url 'cases_service:case_list' %}"
+                class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
+                aria-current="page"
+                >View all active cases</a
+              >
+            </li>
+            {% endif %} {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
             <li><a href="{% url 'login' %}">Login</a></li>

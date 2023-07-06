@@ -2,13 +2,15 @@
 {%block content %}
 
 <div class="flex flex-col items-center justify-center h-screen bg-gray-100">
-  <img
-    src="https://allvectorlogo.com/img/2019/08/national-cyber-security-centre-ncsc-logo-vector.png"
-    class="h-40 mb-8"
-    alt="Logo"
-  />
+  <div class="bg-white rounded-lg p-8 shadow-lg mb-8">
+    <img
+      src="https://allvectorlogo.com/img/2019/08/national-cyber-security-centre-ncsc-logo-vector.png"
+      class="h-40"
+      alt="Logo"
+    />
+  </div>
 
-  <h1 class="text-4xl font-bold mb-4">
+  <h1 class="text-4xl font-bold mb-4 text-center">
     Welcome to the Dutch National Cybersecurity Centre Cybercrime Repository
   </h1>
 
@@ -25,11 +27,11 @@
     <p>Date Joined: {{ user.date_joined }}</p>
     <p>Last Login: {{ user.last_login }}</p>
     {% else %}
-    <p>
+    <p class="text-center">
       If you are an NCSC officer, please
       <a href="{% url 'login' %}" class="text-blue-500 underline">Login</a>
     </p>
-    <p>
+    <p class="text-center">
       If you are a civilian, please use the buttons below or the navigation bar
     </p>
     {% endif %}

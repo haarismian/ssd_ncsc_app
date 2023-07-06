@@ -1,38 +1,46 @@
-{% extends 'base_app/base.html' %} {% block title %}CVD Report List{% endblock%}
-{%block content %}
-<h1>CVD Report List</h1>
-<a href="{% url 'cvd_service:create_cvd' %}">Create New CVD</a>
-<table>
-  <tr>
-    <th>Officer</th>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Vulnerability Type</th>
-    <th>Explanation</th>
-    <th>Reason</th>
-    <th>Domain/IP</th>
-    <th>PGP Key</th>
-  </tr>
-  {% for cvd in cvd_list %}
-  <tr>
-    <td>
-      <a href="{% url 'cvd_service:cvd_detail' cvd.id %}">{{ cvd.officer }}</a>
-    </td>
+{% extends 'base_app/base.html' %} {% block title %} CVD Report List
+{%endblock%} {% block content %}
+<div class="container mx-auto px-4 sm:px-8">
+  <div class="py-8">
+    <h2 class="text-2xl font-semibold leading-tight">CVD Report List</h2>
+    <div class="my-2 flex sm:flex-row flex-col">
+      <a
+        href="{% url 'cvd_service:create_cvd' %}"
+        class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+        >Create New CVD</a
+      >
+    </div>
 
-    <td>{{ cvd.first_name }}</td>
-    <td>{{ cvd.last_name }}</td>
-    <td>{{ cvd.email }}</td>
-    <td>{{ cvd.phone }}</td>
-    <td>{{ cvd.vulnerability_type }}</td>
-    <td>{{ cvd.explanation }}</td>
-    <td>{{ cvd.vulnerability_reason }}</td>
-    <td>{{ cvd.domain_or_ip }}</td>
-    <td>{{ cvd.pgp_key }}</td>
-  </tr>
+    {% for cvd in cvd_list %}
+    <div class="py-2">
+      <div class="flex flex-col border-2 rounded-lg p-4 bg-white">
+        <div class="font-semibold text-xl">{{ cvd.officer }}</div>
+        <p>{{ cvd.first_name }} {{ cvd.last_name }}</p>
+        <p>Email: {{ cvd.email }}</p>
+        <p>Phone: {{ cvd.phone }}</p>
+        <p>Vulnerability Type: {{ cvd.vulnerability_type }}</p>
+        <p>Explanation: {{ cvd.explanation }}</p>
+        <p>Reason: {{ cvd.vulnerability_reason }}</p>
+        <p>Domain/IP: {{ cvd.domain_or_ip }}</p>
+        <p>PGP Key: {{ cvd.pgp_key }}</p>
 
-  {% endfor %}
-</table>
-
+        {% if user.is_authenticated %}
+        <div class="flex justify-between">
+          <a
+            href="{% url 'cvd_service:cvd_detail' cvd.id %}"
+            class="text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
+            >View</a
+          >
+          <a
+            href="{% url 'cvd_service:delete_cvd' cvd.id %}"
+            class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
+            >Delete</a
+          >
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
