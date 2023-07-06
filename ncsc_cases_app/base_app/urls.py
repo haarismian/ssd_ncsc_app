@@ -8,5 +8,8 @@ urlpatterns = [
     path("cases/", include("cases_service.urls")),
     path("cvd/", include("cvd_service.urls")),
     path("admin/", admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('register/', views.register, name='register'),
+
 
 ]

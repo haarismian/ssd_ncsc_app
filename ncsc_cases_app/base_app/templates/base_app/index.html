@@ -5,6 +5,18 @@
   </head>
   <body>
     <h1>Welcome to the Home Page</h1>
+
+    <h1>Welcome, {{ request.user.username }}!</h1>
+
+    <p>User ID: {{ request.user.id }}</p>
+    <p>First Name: {{ request.user.first_name }}</p>
+    <p>Last Name: {{ request.user.last_name }}</p>
+    <p>Email: {{ request.user.email }}</p>
+    <p>Is Active: {{ request.user.is_active }}</p>
+    <p>Is Staff: {{ request.user.is_staff }}</p>
+    <p>Is Superuser: {{ request.user.is_superuser }}</p>
+    <p>Date Joined: {{ request.user.date_joined }}</p>
+    <p>Last Login: {{ request.user.last_login }}</p>
     <ul>
       <li><a href="http://localhost:8000/cvd/">Go to CVD page</a></li>
       <li><a href="http://localhost:8000/cases/">Go to Cases page</a></li>
