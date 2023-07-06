@@ -1,0 +1,27 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Add your CSS and other common headers here -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <nav>
+      <!-- Add your navbar content here -->
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/cvd/">CVD</a></li>
+        <li><a href="/cases/">Cases</a></li>
+      </ul>
+    </nav>
+
+    <main>{% block content %} {% endblock %}</main>
+
+    <footer>
+      <!-- Add your footer content here -->
+    </footer>
+
+    <!-- Add your JavaScript and other common scripts here -->
+  </body>
+</html>
