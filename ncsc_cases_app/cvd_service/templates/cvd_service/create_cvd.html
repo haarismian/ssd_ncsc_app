@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Create CVD</title>
-  </head>
-  <body>
-    <h1>Create CVD</h1>
+{% extends 'base_app/base.html' %} {% block title %}Create CVD{% endblock %}
+{%block content %}
 
-    <form method="POST">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">Create</button>
-    </form>
-  </body>
-</html>
+<form method="POST">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Create</button>
+</form>
+
+{% endblock %}

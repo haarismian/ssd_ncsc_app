@@ -1,7 +1,13 @@
 <!-- templates/registration/logged_out.html -->
 
+{% extends 'base_app/base.html' %} {% block title %}Main page{% endblock %}
+{%block content %}
+
 <h2>Logged out</h2>
 <p>
   You have been successfully logged out.
   <a href="{% url 'login' %}">Log in again?</a>
+  <a href="{% url 'home' %}">Return to home page</a>
 </p>
+
+{% endblock %}

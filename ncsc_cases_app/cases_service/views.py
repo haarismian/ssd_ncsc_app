@@ -21,6 +21,13 @@ class CaseListView(generic.ListView):
         return Case.objects.all()
 
 
+class CaseDetailView(generic.DetailView):
+    model = Case
+    # Specify the template for case detail
+    template_name = 'cases_service/case_detail.html'
+    context_object_name = 'case'  # Name to access the case object in the template
+
+
 class CaseCreateView(CreateView):
     model = Case
     fields = ['title', 'description']

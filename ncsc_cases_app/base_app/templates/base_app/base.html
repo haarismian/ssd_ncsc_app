@@ -11,7 +11,7 @@
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
       >
-        <a href="#" class="flex items-center">
+        <a href="{% url 'home' %}" class="flex items-center">
           <img
             src="https://allvectorlogo.com/img/2019/08/national-cyber-security-centre-ncsc-logo-vector.png"
             class="h-20 mr-3"
@@ -19,7 +19,8 @@
           />
         </a>
         <span class="text-gray-600 text-sm"
-          >Welcome {{ user.first_name }} {{ user.last_name }}</span
+          >Hello, {{ user.first_name }} {{ user.last_name }} welcome to the NCSC
+          case management repository</span
         >
         <button
           data-collapse-toggle="navbar-default"
@@ -75,6 +76,8 @@
             </li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
             {% endif %}
           </ul>
         </div>
