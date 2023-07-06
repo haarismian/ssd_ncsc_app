@@ -25,6 +25,12 @@ SECRET_KEY = 'django-insecure-)%83h9k+f02g$3i(#57#b55)^!io7yubk@3^e4pw4#@18d(ie+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SESSION_COOKIE_AGE = 300
+SESSION_COOKIE_SECURE = True  # Recommended for production environments
+# Optional, session expires when the browser is closed
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
 ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = '/'

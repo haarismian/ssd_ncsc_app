@@ -1,32 +1,55 @@
 {% extends 'base_app/base.html' %} {% block title %}Main page{% endblock %}
 {%block content %}
 
-<h1 class="text-3xl font-bold underline">Welcome to the Home Page</h1>
+<div class="flex flex-col items-center justify-center h-screen bg-gray-100">
+  <img
+    src="https://allvectorlogo.com/img/2019/08/national-cyber-security-centre-ncsc-logo-vector.png"
+    class="h-40 mb-8"
+    alt="Logo"
+  />
 
-{% if user.is_authenticated %}
-<h1>Welcome, {{ user.username }}!</h1>
-<p>User ID: {{ user.id }}</p>
-<p>First Name: {{ user.first_name }}</p>
-<p>Last Name: {{ user.last_name }}</p>
-<p>Email: {{ user.email }}</p>
-<p>Is Active: {{ user.is_active }}</p>
-<p>Is Staff: {{ user.is_staff }}</p>
-<p>Is Superuser: {{ user.is_superuser }}</p>
-<p>Date Joined: {{ user.date_joined }}</p>
-<p>Last Login: {{ user.last_login }}</p>
-{% else %}
-<p>Please <a href="{% url 'login' %}">Login</a> to view user information.</p>
-{% endif %}
+  <h1 class="text-4xl font-bold mb-4">
+    Welcome to the Dutch National Cybersecurity Centre Cybercrime Repository
+  </h1>
 
-<a
-  href="{% url 'cvd_service:cvd_list' %}"
-  class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-  >Go to CVD page</a
->
+  <div class="bg-white rounded-lg p-8 shadow-lg">
+    {% if user.is_authenticated %}
+    <h2 class="text-2xl mb-4">Welcome, {{ user.username }}!</h2>
+    <p>User ID: {{ user.id }}</p>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Is Active: {{ user.is_active }}</p>
+    <p>Is Staff: {{ user.is_staff }}</p>
+    <p>Is Superuser: {{ user.is_superuser }}</p>
+    <p>Date Joined: {{ user.date_joined }}</p>
+    <p>Last Login: {{ user.last_login }}</p>
+    {% else %}
+    <p>
+      If you are an NCSC officer, please
+      <a href="{% url 'login' %}" class="text-blue-500 underline">Login</a>
+    </p>
+    <p>
+      If you are a civilian, please use the buttons below or the navigation bar
+    </p>
+    {% endif %}
+  </div>
 
-<a
-  href="{% url 'cases_service:case_list' %}"
-  class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-  >Go to Cases page</a
->
+  <div class="mt-8 space-x-4">
+    <a
+      href="{% url 'cvd_service:cvd_list' %}"
+      class="rounded-md bg-indigo-600 px-4 py-2 text-white font-semibold hover:bg-indigo-500"
+    >
+      Go to CVD page
+    </a>
+
+    <a
+      href="{% url 'cases_service:case_list' %}"
+      class="rounded-md bg-indigo-600 px-4 py-2 text-white font-semibold hover:bg-indigo-500"
+    >
+      Go to Cases page
+    </a>
+  </div>
+</div>
+
 {% endblock %}
