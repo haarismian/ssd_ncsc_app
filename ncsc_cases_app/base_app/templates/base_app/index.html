@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html>
+  <script src="https://cdn.tailwindcss.com"></script>
   <head>
     <title>Home Page</title>
   </head>
   <body>
-    <h1>Welcome to the Home Page</h1>
+    <h1 class="text-3xl font-bold underline">Welcome to the Home Page</h1>
 
-    <h1>Welcome, {{ request.user.username }}!</h1>
+    {% if user.is_authenticated %}
+    <h1>Welcome, {{ user.username }}!</h1>
+    <p>User ID: {{ user.id }}</p>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Is Active: {{ user.is_active }}</p>
+    <p>Is Staff: {{ user.is_staff }}</p>
+    <p>Is Superuser: {{ user.is_superuser }}</p>
+    <p>Date Joined: {{ user.date_joined }}</p>
+    <p>Last Login: {{ user.last_login }}</p>
+    {% else %}
+    <p>
+      Please <a href="{% url 'login' %}">Login</a> to view user information.
+    </p>
+    {% endif %}
 
-    <p>User ID: {{ request.user.id }}</p>
-    <p>First Name: {{ request.user.first_name }}</p>
-    <p>Last Name: {{ request.user.last_name }}</p>
-    <p>Email: {{ request.user.email }}</p>
-    <p>Is Active: {{ request.user.is_active }}</p>
-    <p>Is Staff: {{ request.user.is_staff }}</p>
-    <p>Is Superuser: {{ request.user.is_superuser }}</p>
-    <p>Date Joined: {{ request.user.date_joined }}</p>
-    <p>Last Login: {{ request.user.last_login }}</p>
-    <ul>
-      <li><a href="http://localhost:8000/cvd/">Go to CVD page</a></li>
-      <li><a href="http://localhost:8000/cases/">Go to Cases page</a></li>
-    </ul>
+    <a
+      href="{% url 'cvd_service:cvd_list' %}"
+      class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >Go to CVD page</a
+    >
+
+    <a
+      href="{% url 'cases_service:case_list' %}"
+      class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >Go to Cases page</a
+    >
   </body>
 </html>
