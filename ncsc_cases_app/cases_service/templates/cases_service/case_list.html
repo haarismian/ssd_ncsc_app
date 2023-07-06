@@ -1,29 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Case List</title>
-  </head>
-  <body>
-    <a href="{% url 'cases_service:create_case' %}">Create New Case</a>
+{% extends 'base_app/base.html' %} {% block title %}Case List{% endblock %}
+{%block content %}
 
-    <h1>Case List</h1>
-    <ul>
-      {% for case in cases %}
-      <li>
-        {{ case.title }} (Case ID: {{ case.id }})
-        <p>Description: {{ case.description }}</p>
-        <p>Created by User ID: {{ case.user_id }}</p>
+<a href="{% url 'cases_service:create_case' %}">Create New Case</a>
 
-        <!-- This form should be inside the loop and the <li> -->
-        <form
-          method="POST"
-          action="{% url 'cases_service:delete_case' case.id %}"
-        >
-          {% csrf_token %}
-          <input type="submit" value="Delete Case" />
-        </form>
-      </li>
-      {% endfor %}
-    </ul>
-  </body>
-</html>
+<h1>Case List</h1>
+<ul>
+  {% for case in cases %}
+  <li>
+    {{ case.title }} (Case ID: {{ case.id }})
+    <p>Description: {{ case.description }}</p>
+    <p>Created by User ID: {{ case.user_id }}</p>
+
+    <!-- This form should be inside the loop and the <li> -->
+    <form method="POST" action="{% url 'cases_service:delete_case' case.id %}">
+      {% csrf_token %}
+      <input type="submit" value="Delete Case" />
+    </form>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
