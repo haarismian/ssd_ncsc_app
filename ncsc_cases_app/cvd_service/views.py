@@ -18,21 +18,6 @@ class CVDListView(LoginRequiredMixin, generic.ListView):
     context_object_name = 'cvd_list'
 
     def get_queryset(self):
-        # Creating dummy data
-        CvdReport.objects.create(officer='Officer1',
-                                 vulnerability_type='injection',
-                                 explanation='Dummy explanation',
-                                 vulnerability_reason='Dummy reason',
-                                 domain_or_ip='192.168.0.1',
-                                 pgp_key='Dummy PGP Key')
-
-        CvdReport.objects.create(officer='Officer2',
-                                 vulnerability_type='xss',
-                                 explanation='Another dummy explanation',
-                                 vulnerability_reason='Another dummy reason',
-                                 domain_or_ip='192.168.0.2',
-                                 pgp_key='Another dummy PGP Key')
-
         # Return all CvdReport objects
         return CvdReport.objects.all()
 
@@ -45,7 +30,7 @@ class CVDDetailView(LoginRequiredMixin, generic.DetailView):
 
 class CVDCreateView(generic.CreateView):
     model = CvdReport
-    fields = ['officer', 'first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
+    fields = ['first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
               'explanation', 'vulnerability_reason', 'domain_or_ip', 'pgp_key']
     template_name = 'cvd_service/create_cvd.html'
     success_url = reverse_lazy('cvd_service:cvd_list')

@@ -17,16 +17,15 @@ class CvdReport(models.Model):
         ('confidentiality', 'Confidentiality'),
     )
 
-    officer = models.CharField(max_length=100)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
+    email = models.EmailField()  # Email is now required
     phone = models.CharField(max_length=20, blank=True, null=True)
     vulnerability_type = models.CharField(
-        max_length=30, choices=VULNERABILITY_TYPES)
-    explanation = models.TextField()
-    vulnerability_reason = models.TextField()
-    domain_or_ip = models.TextField()
+        max_length=30, choices=VULNERABILITY_TYPES)  # Vulnerability type is now required
+    explanation = models.TextField()  # Explanation is now required
+    vulnerability_reason = models.TextField()  # Reason is now required
+    domain_or_ip = models.TextField()  # Domain/IP is now required
     pgp_key = models.TextField()
 
     def __str__(self):

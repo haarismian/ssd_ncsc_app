@@ -14,15 +14,15 @@
     {% for cvd in cvd_list %}
     <div class="py-2">
       <div class="flex flex-col border-2 rounded-lg p-4 bg-white">
-        <div class="font-semibold text-xl">{{ cvd.officer }}</div>
-        <p>{{ cvd.first_name }} {{ cvd.last_name }}</p>
-        <p>Email: {{ cvd.email }}</p>
-        <p>Phone: {{ cvd.phone }}</p>
-        <p>Vulnerability Type: {{ cvd.vulnerability_type }}</p>
-        <p>Explanation: {{ cvd.explanation }}</p>
-        <p>Reason: {{ cvd.vulnerability_reason }}</p>
-        <p>Domain/IP: {{ cvd.domain_or_ip }}</p>
-        <p>PGP Key: {{ cvd.pgp_key }}</p>
+        <p><strong>First Name:</strong> {{ cvd.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ cvd.last_name }}</p>
+        <p><strong>Email:</strong> {{ cvd.email }}</p>
+        <p><strong>Phone:</strong> {{ cvd.phone }}</p>
+        <p><strong>Vulnerability Type:</strong> {{ cvd.vulnerability_type }}</p>
+        <p><strong>Explanation:</strong> {{ cvd.explanation }}</p>
+        <p><strong>Reason:</strong> {{ cvd.vulnerability_reason }}</p>
+        <p><strong>Domain/IP:</strong> {{ cvd.domain_or_ip }}</p>
+        <p><strong>PGP Key:</strong> {{ cvd.pgp_key }}</p>
 
         {% if user.is_authenticated %}
         <div class="flex justify-between">
@@ -31,11 +31,18 @@
             class="text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
             >View</a
           >
-          <a
-            href="{% url 'cvd_service:delete_cvd' cvd.id %}"
-            class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
-            >Delete</a
+          <form
+            method="POST"
+            action="{% url 'cvd_service:delete_cvd' cvd.id %}"
           >
+            {% csrf_token %}
+            <button
+              type="submit"
+              class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
+            >
+              Delete
+            </button>
+          </form>
         </div>
         {% endif %}
       </div>
