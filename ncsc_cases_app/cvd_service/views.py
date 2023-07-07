@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
 from django.urls import reverse_lazy
 from django.views import generic
 from .models import CvdReport
 from django.utils import timezone
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -19,7 +20,11 @@ class CVDListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         # Return all CvdReport objects
-        return CvdReport.objects.all()
+        try:
+            return CvdReport.objects.all()
+        except Exception as e:
+            logger.error('Error in CVDListView.get_queryset: %s', e)
+            raise
 
 
 class CVDDetailView(LoginRequiredMixin, generic.DetailView):
@@ -38,6 +43,10 @@ class CVDCreateView(generic.CreateView):
 
 @require_POST
 def delete_cvd(request, pk):
-    cvd = get_object_or_404(CvdReport, pk=pk)
-    cvd.delete()
-    return redirect('cvd_service:cvd_list')
+    try:
+        cvd = get_object_or_404(CvdReport, pk=pk)
+        cvd.delete()
+        return redirect('cvd_service:cvd_list')
+    except Exception as e:
+        logger.error('Error in delete_cvd: %s', e)
+        raise
