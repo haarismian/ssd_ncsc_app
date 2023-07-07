@@ -1,5 +1,6 @@
 from django.test import TestCase, Client, RequestFactory
 from django.contrib.auth.models import AnonymousUser, User
+from django.core.exceptions import ValidationError
 from django.urls import reverse
 from .models import CvdReport
 from .views import CVDListView, CVDDetailView, CVDCreateView, delete_cvd
@@ -16,19 +17,37 @@ class CvdReportTest(TestCase):
             last_name="Doe",
             email="john@example.com",
             phone="1234567890",
-            vulnerability_type="Test vulnerability type",
+            vulnerability_type="broken_auth",
             explanation="Test explanation",
             vulnerability_reason="Test vulnerability reason",
             domain_or_ip="192.0.2.0",
             pgp_key="Test PGP Key"
         )
 
+    def test_invalid_vulnerability_type(self):
+        with self.assertRaises(ValidationError):
+            invalid_cvdreport = CvdReport(
+                first_name="John",
+                last_name="Doe",
+                email="john@example.com",
+                phone="1234567890",
+                vulnerability_type="Invalid vulnerability type",
+                explanation="Test explanation",
+                vulnerability_reason="Test vulnerability reason",
+                domain_or_ip="192.0.2.0",
+                pgp_key="Test PGP Key"
+            )
+            invalid_cvdreport.full_clean()
+
     def test_CVDListView_get_queryset(self):
         self.client.login(username='johndoe', password='password')
         response = self.client.get(reverse('cvd_service:cvd_list'))
         self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(response.context['cvd_list'], [
-                                 '<CvdReport: CvdReport object (1)>'])
+        self.assertQuerysetEqual(
+            response.context['cvd_list'],
+            CvdReport.objects.all(),
+            transform=lambda x: x  # compare the objects directly
+        )
 
     def test_CVDDetailView(self):
         self.client.login(username='johndoe', password='password')
@@ -44,7 +63,7 @@ class CvdReportTest(TestCase):
             'last_name': 'Doe',
             'email': 'jane@example.com',
             'phone': '0987654321',
-            'vulnerability_type': 'Test vulnerability type',
+            'vulnerability_type': 'insecure_deserialization',
             'explanation': 'Test explanation',
             'vulnerability_reason': 'Test vulnerability reason',
             'domain_or_ip': '192.0.2.0',
