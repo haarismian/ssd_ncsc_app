@@ -10,7 +10,7 @@ urlpatterns = [
     path("cvd/", include("cvd_service.urls")),
     path("admin/", admin.site.urls),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
     path('accounts/password_change/',
          auth_views.PasswordChangeView.as_view(), name='password_change'),
     path('accounts/password_change/done/',

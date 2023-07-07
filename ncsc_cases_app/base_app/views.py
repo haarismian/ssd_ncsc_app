@@ -1,6 +1,8 @@
 from django.views.generic import TemplateView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView as AuthLoginView
+from django.contrib.auth.views import LogoutView as AuthLogoutView
+
 import logging
 from django.shortcuts import render, redirect
 
@@ -15,6 +17,26 @@ class LoginView(AuthLoginView):
             get_client_ip(self.request)  # function to get client IP
         )
         return super().form_invalid(form)
+
+    def form_valid(self, form):
+        logger.info(
+            'Successful login - Username: %s, IP address: %s',
+            self.request.POST['username'],
+            get_client_ip(self.request)  # function to get client IP
+        )
+        return super().form_valid(form)
+
+
+class LogoutView(AuthLogoutView):
+    def dispatch(self, request, *args, **kwargs):
+        username = self.request.user.username
+        ip = get_client_ip(self.request)
+        logger.info(
+            'User logged out - Username: %s, IP address: %s',
+            username,
+            ip
+        )
+        return super().dispatch(request, *args, **kwargs)
 
 
 def get_client_ip(request):
