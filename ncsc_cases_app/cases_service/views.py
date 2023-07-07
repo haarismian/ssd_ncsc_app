@@ -4,6 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.utils import timezone
 from django.views.generic.edit import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from django.views.decorators.http import require_POST
@@ -28,22 +29,15 @@ class CaseDetailView(generic.DetailView):
     context_object_name = 'case'  # Name to access the case object in the template
 
 
-class CaseCreateView(CreateView):
+class CaseCreateView(LoginRequiredMixin, CreateView):
     model = Case
     fields = ['title', 'description']
     template_name = 'cases_service/create_case.html'
     success_url = reverse_lazy('cases_service:case_list')
 
-
-# class DetailView(generic.DetailView):
-#     model = Question
-#     template_name = "cases_service/detail.html"
-
-#     def get_queryset(self):
-#         """
-#         Excludes any questions that aren't published yet.
-#         """
-#         return Question.objects.filter(pub_date__lte=timezone.now())
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 @require_POST

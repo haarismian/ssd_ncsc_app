@@ -6,6 +6,7 @@
   <div class="bg-white rounded-lg shadow-md p-8">
     <h2 class="text-xl font-bold mb-4">{{ case.title }}</h2>
     <p class="mb-4"><strong>Case ID:</strong> {{ case.id }}</p>
+    <p class="mb-4"> <strong>Created by: </strong>{{ case.user.first_name }} {{ case.user.last_name }} </p>
     <p class="mb-4"><strong>Description:</strong> {{ case.description }}</p>
   </div>
 </div>
