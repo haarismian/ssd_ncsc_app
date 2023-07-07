@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.http import require_POST
 import logging
+from django.contrib.auth.decorators import user_passes_test
 
 from .models import Case
 
@@ -60,6 +61,7 @@ class CaseCreateView(LoginRequiredMixin, CreateView):
 
 
 @require_POST
+@user_passes_test(lambda user: user.is_authenticated, login_url='/login/')
 def delete_case(request, id):
     try:
         case = Case.objects.get(id=id)
