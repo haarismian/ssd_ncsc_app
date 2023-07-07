@@ -5,11 +5,13 @@ from django.views import generic
 from django.utils import timezone
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
 from django.views.decorators.http import require_POST
+import logging
 
 from .models import Case
+
+# Create a logger for this module
+logger = logging.getLogger(__name__)
 
 
 class CaseListView(generic.ListView):
@@ -18,15 +20,27 @@ class CaseListView(generic.ListView):
     context_object_name = 'cases'
 
     def get_queryset(self):
-
-        return Case.objects.all()
+        try:
+            return Case.objects.all()
+        except Exception as e:
+            logger.exception("Error getting queryset in CaseListView: %s", e)
+            return None
 
 
 class CaseDetailView(generic.DetailView):
     model = Case
-    # Specify the template for case detail
     template_name = 'cases_service/case_detail.html'
-    context_object_name = 'case'  # Name to access the case object in the template
+    context_object_name = 'case'
+
+    def get_object(self, queryset=None):
+        try:
+            return super().get_object(queryset)
+        except Http404 as e:
+            logger.error("Case not found in CaseDetailView: %s", e)
+            raise e
+        except Exception as e:
+            logger.exception("Error in CaseDetailView: %s", e)
+            raise e
 
 
 class CaseCreateView(LoginRequiredMixin, CreateView):
@@ -36,12 +50,24 @@ class CaseCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('cases_service:case_list')
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+        try:
+            form.instance.user = self.request.user
+            return super().form_valid(form)
+        except Exception as e:
+            logger.exception(
+                "Error in form validation in CaseCreateView: %s", e)
+            return self.form_invalid(form)
 
 
 @require_POST
 def delete_case(request, id):
-    case = Case.objects.get(id=id)
-    case.delete()
-    return redirect('cases_service:case_list')  # name of your case list URL
+    try:
+        case = Case.objects.get(id=id)
+        case.delete()
+        return redirect('cases_service:case_list')
+    except Case.DoesNotExist as e:
+        logger.error("Case to delete not found: %s", e)
+        raise Http404("Case does not exist")
+    except Exception as e:
+        logger.exception("Error deleting case: %s", e)
+        return HttpResponse(status=500)
