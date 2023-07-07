@@ -10,6 +10,9 @@
 
 <h1 class="text-2xl font-bold mb-4">Case List</h1>
 
+{% if not cases %}
+<p>There are no active cases.</p>
+{% else %}
 <table class="table-auto w-full">
   <thead>
     <tr>
@@ -49,4 +52,4 @@
     {% endfor %}
   </tbody>
 </table>
-{% endblock %}
+{% endif %} {% endblock %}
