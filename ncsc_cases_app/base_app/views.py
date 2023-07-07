@@ -19,7 +19,7 @@ class LoginView(AuthLoginView):
             )
         except Exception as e:
             logger.error('Error in LoginView.form_invalid: %s', e)
-        return super().form_invalid(form)
+        return self.render_to_response(self.get_context_data(form=form))
 
     def form_valid(self, form):
         try:
