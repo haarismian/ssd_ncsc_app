@@ -7,6 +7,54 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
+    <!-- Cookie Consent Popup -->
+    {% if not request.session.cookie_consent %}
+    <div
+      id="cookie-popup"
+      class="fixed bottom-0 left-0 w-full bg-blue-500 text-white py-3 px-6 flex items-center justify-between"
+    >
+      <p>
+        We use cookies to improve your experience. By using our site, you agree
+        to our use of cookies.
+      </p>
+      <button
+        id="cookie-consent-button"
+        class="bg-white text-blue-500 px-4 py-2 rounded"
+      >
+        I Agree
+      </button>
+    </div>
+    <script>
+      document
+        .getElementById("cookie-consent-button")
+        .addEventListener("click", function () {
+          fetch("{% url 'cookie_consent' %}", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "X-CSRFToken": "{{ csrf_token }}",
+            },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((json) => {
+              document.getElementById("cookie-popup").style.display = "none";
+            })
+            .catch((e) => {
+              console.log(
+                "There has been a problem with the fetch operation: " +
+                  e.message
+              );
+            });
+        });
+    </script>
+    {% endif %}
+    <!-- End Cookie Consent Popup -->
+
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"

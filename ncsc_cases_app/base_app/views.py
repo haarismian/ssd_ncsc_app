@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.http import JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView as AuthLoginView
 from django.contrib.auth.views import LogoutView as AuthLogoutView
@@ -84,3 +85,8 @@ def register(request):
         return render(request, 'registration/register.html', {'form': form})
     except Exception as e:
         logger.error('Error in register view: %s', e)
+
+
+def cookie_consent(request):
+    request.session['cookie_consent'] = True
+    return JsonResponse({'status': 'ok'})
