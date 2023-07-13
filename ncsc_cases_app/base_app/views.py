@@ -90,3 +90,7 @@ def register(request):
 def cookie_consent(request):
     request.session['cookie_consent'] = True
     return JsonResponse({'status': 'ok'})
+
+
+def privacy_policy(request):
+    return render(request, 'base_app/privacy_policy.html')

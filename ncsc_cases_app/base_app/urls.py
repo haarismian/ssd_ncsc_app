@@ -9,6 +9,8 @@ urlpatterns = [
     path("cases/", include("cases_service.urls")),
     path("cvd/", include("cvd_service.urls")),
     path('cookie-consent/', views.cookie_consent, name='cookie_consent'),
+    path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
+
     path("admin/", admin.site.urls),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
