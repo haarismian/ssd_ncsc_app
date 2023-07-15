@@ -30,6 +30,9 @@ SESSION_COOKIE_SECURE = True  # Recommended for production environments
 # Optional, session expires when the browser is closed
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
+LOGIN_ATTEMPTS_CACHE_TIMEOUT = 600  # 10 minutes
+
+
 ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = '/'

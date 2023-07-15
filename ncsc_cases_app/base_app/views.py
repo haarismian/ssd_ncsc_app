@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView as AuthLoginView
 from django.contrib.auth.views import LogoutView as AuthLogoutView
+from django.core.cache import cache
+from django.conf import settings
 
 import logging
 from django.shortcuts import render, redirect
@@ -12,26 +14,43 @@ logger = logging.getLogger(__name__)
 
 class LoginView(AuthLoginView):
     def form_invalid(self, form):
+        username = self.request.POST.get('username')
+        ip = get_client_ip(self.request)
+        cache_key = f"login_attempts:{ip}"
+        login_attempts = cache.get(cache_key, 0)
+
+        # Check if the user has reached the maximum login attempts
+        if login_attempts >= 5:
+            # Perform IP blocking logic here
+            # You can use a library like django-ipware to block the IP
+
+            # Set a flag in the session to display the banner
+            self.request.session['login_attempts_exceeded'] = True
+
+            # Log a warning indicating that the user has been blocked
+            logger.warning(
+                'User blocked due to exceeded login attempts - Username: %s, IP address: %s',
+                username,
+                ip
+            )
+
+            # Redirect the user to the login page
+            return redirect('login')
+
+        # Increment the login attempts counter
+        cache.set(cache_key, login_attempts + 1,
+                  settings.LOGIN_ATTEMPTS_CACHE_TIMEOUT)
+
         try:
             logger.warning(
                 'Failed login attempt - Username: %s, IP address: %s',
-                self.request.POST['username'],
-                get_client_ip(self.request)  # function to get client IP
+                username,
+                ip
             )
         except Exception as e:
             logger.error('Error in LoginView.form_invalid: %s', e)
-        return self.render_to_response(self.get_context_data(form=form))
 
-    def form_valid(self, form):
-        try:
-            logger.info(
-                'Successful login - Username: %s, IP address: %s',
-                self.request.POST['username'],
-                get_client_ip(self.request)  # function to get client IP
-            )
-        except Exception as e:
-            logger.error('Error in LoginView.form_valid: %s', e)
-        return super().form_valid(form)
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class LogoutView(AuthLogoutView):
