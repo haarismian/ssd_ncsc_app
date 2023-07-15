@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+
 from django.urls import reverse_lazy
 from django.views import generic
 from .models import CvdReport
@@ -38,7 +40,12 @@ class CVDCreateView(generic.CreateView):
     fields = ['first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
               'explanation', 'vulnerability_reason', 'domain_or_ip', 'pgp_key']
     template_name = 'cvd_service/create_cvd.html'
-    success_url = reverse_lazy('cvd_service:cvd_list')
+    success_url = reverse_lazy('cvd_service:create_cvd')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, 'CVD report was successfully created!')
+        return response
 
 
 @require_POST
