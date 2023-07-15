@@ -30,11 +30,9 @@ SESSION_COOKIE_SECURE = True  # Recommended for production environments
 # Optional, session expires when the browser is closed
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-
 ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = '/'
-
 
 # Application definition
 
@@ -80,7 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'base_app.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -91,6 +88,10 @@ DATABASES = {
     }
 }
 
+# Keys for Django Cryptography
+KEYS = {
+    'default': 'xGQ3fAr2K9TxBi7MCuOtkZsbYB-7CpSwYqLnwITlgmE='
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -110,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -121,7 +121,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
