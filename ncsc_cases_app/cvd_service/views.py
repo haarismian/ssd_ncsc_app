@@ -43,7 +43,9 @@ class CVDCreateView(generic.CreateView):
     success_url = reverse_lazy('cvd_service:create_cvd')
 
     def form_valid(self, form):
+        # Call the parent class's form_valid() method to save the form data
         response = super().form_valid(form)
+        # Add a success message to the user
         messages.success(self.request, 'CVD report was successfully created!')
         return response
 
@@ -53,6 +55,7 @@ def delete_cvd(request, pk):
     try:
         cvd = get_object_or_404(CvdReport, pk=pk)
         cvd.delete()
+        # Redirect the user to the CVD list view after deleting
         return redirect('cvd_service:cvd_list')
     except Exception as e:
         logger.error('Error in delete_cvd: %s', e)

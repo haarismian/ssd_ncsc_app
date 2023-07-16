@@ -26,6 +26,7 @@ class CvdReportTest(TestCase):
 
     def test_invalid_vulnerability_type(self):
         with self.assertRaises(ValidationError):
+            # Attempt to create a CvdReport instance with an invalid vulnerability type
             invalid_cvdreport = CvdReport(
                 first_name="John",
                 last_name="Doe",
@@ -41,8 +42,10 @@ class CvdReportTest(TestCase):
 
     def test_CVDListView_get_queryset(self):
         self.client.login(username='johndoe', password='password')
+        # Send a GET request to the cvd_list URL
         response = self.client.get(reverse('cvd_service:cvd_list'))
         self.assertEqual(response.status_code, 200)
+        # Compare the queryset of CvdReport objects in the context with the expected queryset
         self.assertQuerysetEqual(
             response.context['cvd_list'],
             CvdReport.objects.all(),
@@ -51,13 +54,16 @@ class CvdReportTest(TestCase):
 
     def test_CVDDetailView(self):
         self.client.login(username='johndoe', password='password')
+        # Request the detail view for a specific CvdReport instance
         response = self.client.get(
             reverse('cvd_service:cvd_detail', args=(self.cvdreport.id,)))
         self.assertEqual(response.status_code, 200)
+        # Ensure the cvdreport object in the context matches the expected CvdReport instance
         self.assertEqual(response.context['cvdreport'], self.cvdreport)
 
     def test_CVDCreateView(self):
         self.client.login(username='johndoe', password='password')
+        # Send a POST request to the create_cvd URL with form data
         response = self.client.post(reverse('cvd_service:create_cvd'), {
             'first_name': 'Jane',
             'last_name': 'Doe',
@@ -70,12 +76,16 @@ class CvdReportTest(TestCase):
             'pgp_key': 'Test PGP Key'
         })
         self.assertEqual(response.status_code, 302)
+        # Ensure the number of CvdReport objects has increased by 1
         self.assertEqual(CvdReport.objects.count(), 2)
+        # Verify that the last CvdReport object created has the expected first_name value
         self.assertEqual(CvdReport.objects.last().first_name, 'Jane')
 
     def test_delete_cvd(self):
         self.client.login(username='johndoe', password='password')
+        # Send a POST request to delete a specific CvdReport instance
         response = self.client.post(
             reverse('cvd_service:delete_cvd', args=(self.cvdreport.id,)))
         self.assertEqual(response.status_code, 302)
+        # Ensure the CvdReport instance has been deleted (count is 0)
         self.assertEqual(CvdReport.objects.count(), 0)
