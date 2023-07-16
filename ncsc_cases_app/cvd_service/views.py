@@ -42,13 +42,6 @@ class CVDCreateView(generic.CreateView):
     template_name = 'cvd_service/create_cvd.html'
     success_url = reverse_lazy('cvd_service:create_cvd')
 
-    def form_valid(self, form):
-        # Call the parent class's form_valid() method to save the form data
-        response = super().form_valid(form)
-        # Add a success message to the user
-        messages.success(self.request, 'CVD report was successfully created!')
-        return response
-
 
 @require_POST
 def delete_cvd(request, pk):
