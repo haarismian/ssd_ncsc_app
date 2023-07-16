@@ -1,28 +1,20 @@
 {% extends 'base_app/base.html' %} {% block title %}Create CVD{% endblock %}
 {%block content %}
-<div class="flex flex-col items-center h-screen bg-gray-100">
-  <h1 class="text-4xl font-bold mb-4">Create CVD</h1>
-
+<div class="container mx-auto py-5">
+  <h1 class="text-3xl mb-4">Create CVD Report</h1>
   <form
     class="bg-white w-full rounded-lg shadow-lg p-8"
     method="POST"
     action="{% url 'cvd_service:create_cvd' %}"
   >
     {% csrf_token %}
-
     <div class="mb-4">
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
         for="id_first_name"
         >First Name</label
       >
-      <input
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_first_name"
-        type="text"
-        name="first_name"
-        placeholder="Enter first name"
-      />
+      {{ form.first_name }}
     </div>
     <div class="mb-4">
       <label
@@ -30,155 +22,66 @@
         for="id_last_name"
         >Last Name</label
       >
-      <input
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_last_name"
-        type="text"
-        name="last_name"
-        placeholder="Enter last name"
-      />
+      {{ form.last_name }}
     </div>
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="id_email"
-        >Email (required)</label
+        >Email</label
       >
-      <input
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_email"
-        type="email"
-        name="email"
-        placeholder="Enter email"
-        required
-      />
+      {{ form.email }}
     </div>
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="id_phone"
         >Phone</label
       >
-      <input
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_phone"
-        type="text"
-        name="phone"
-        placeholder="Enter phone"
-      />
+      {{ form.phone }}
     </div>
     <div class="mb-4">
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
         for="id_vulnerability_type"
-        >Vulnerability Type (required)</label
+        >Vulnerability Type</label
       >
-      <select
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_vulnerability_type"
-        name="vulnerability_type"
-        required
-      >
-        {% for choice in form.vulnerability_type.field.choices %}
-        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
-        {% endfor %}
-      </select>
+      {{ form.vulnerability_type }}
     </div>
     <div class="mb-4">
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
         for="id_explanation"
-        >Step-by-step explanation of the vlunerability (required)</label
+        >Explanation</label
       >
-      <textarea
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_explanation"
-        name="explanation"
-        rows="5"
-        placeholder="Enter explanation"
-        required
-      ></textarea>
+      {{ form.explanation }}
     </div>
     <div class="mb-4">
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
         for="id_vulnerability_reason"
-        >Explain why the identified vulnerability needs reporting
-        (required)</label
+        >Vulnerability Reason</label
       >
-      <textarea
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_vulnerability_reason"
-        name="vulnerability_reason"
-        rows="5"
-        placeholder="Enter vulnerability reason"
-        required
-      ></textarea>
+      {{ form.vulnerability_reason }}
     </div>
     <div class="mb-4">
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
         for="id_domain_or_ip"
-        >Domain or IP address(es) relating to the report (required)</label
+        >Domain or IP</label
       >
-      <textarea
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_domain_or_ip"
-        name="domain_or_ip"
-        rows="5"
-        placeholder="Enter domain or IP"
-        required
-      ></textarea>
+      {{ form.domain_or_ip }}
     </div>
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="id_pgp_key"
-        >Your own PGP Key</label
+        >PGP Key</label
       >
-      <textarea
-        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        id="id_pgp_key"
-        name="pgp_key"
-        rows="5"
-        placeholder="Enter PGP key"
-      ></textarea>
+      {{ form.pgp_key }}
     </div>
-    <div class="mb-4">
-      <input type="checkbox" id="id_agree_cvd" name="agree_cvd" required />
-      <label for="id_agree_cvd"
-        >I have read and agree to the terms of the CVD policy. (required)</label
+    <div class="flex items-center justify-between">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        type="submit"
       >
+        Submit
+      </button>
     </div>
-
-    <div class="mb-4">
-      <h2 class="text-lg font-bold mb-2">
-        Information about the processing of your personal data
-      </h2>
-      <p>
-        We ask you to provide your name, email address and telephone number in
-        order to communicate with you regarding your report. Providing a name
-        and telephone number is optional. If you are eligible for a reward, we
-        will also need your address if you wish us to send it to you. We may
-        therefore ask for your address after your report is processed. Your data
-        will not be shared with third parties, unless disclosure of these data
-        is compelled by law, or a court ruling.
-      </p>
-    </div>
-
-    <div class="mb-4">
-      <h2 class="text-lg font-bold mb-2">Statement of agreement (required)</h2>
-      <input
-        type="checkbox"
-        id="id_agree_statement"
-        name="agree_statement"
-        required
-      />
-      <label for="id_agree_statement"
-        >Data provided by you may be used for communication in relation to the
-        notification you made and for sending a reward if you qualify.</label
-      >
-    </div>
-    <button
-      type="submit"
-      class="mt-4 bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-indigo-500"
-    >
-      Create
-    </button>
   </form>
 </div>
 {% endblock %}

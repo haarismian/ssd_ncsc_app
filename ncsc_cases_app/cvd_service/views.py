@@ -37,12 +37,38 @@ class CVDDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'cvd_service/cvd_detail.html'
 
 
+class CvdReportForm(forms.ModelForm):
+    class Meta:
+        model = CvdReport
+        fields = ['first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
+                  'explanation', 'vulnerability_reason', 'domain_or_ip', 'pgp_key']
+
+    def __init__(self, *args, **kwargs):
+        super(CvdReportForm, self).__init__(*args, **kwargs)
+
+        input_class = 'appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500'
+        textarea_class = 'appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500'
+
+        self.fields['first_name'].widget.attrs.update({'class': input_class})
+        self.fields['last_name'].widget.attrs.update({'class': input_class})
+        self.fields['email'].widget.attrs.update({'class': input_class})
+        self.fields['phone'].widget.attrs.update({'class': input_class})
+        self.fields['vulnerability_type'].widget.attrs.update(
+            {'class': input_class})
+        self.fields['explanation'].widget.attrs.update(
+            {'class': textarea_class})
+        self.fields['vulnerability_reason'].widget.attrs.update(
+            {'class': textarea_class})
+        self.fields['domain_or_ip'].widget.attrs.update(
+            {'class': textarea_class})
+        self.fields['pgp_key'].widget.attrs.update({'class': textarea_class})
+
+
 class CVDCreateView(generic.CreateView):
     model = CvdReport
-    fields = ['first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
-              'explanation', 'vulnerability_reason', 'domain_or_ip', 'pgp_key']
+    form_class = CvdReportForm
     template_name = 'cvd_service/create_cvd.html'
-    success_url = reverse_lazy('cvd_service:cvd_list')
+    success_url = reverse_lazy('cvd_service:create_cvd')
 
 
 @require_POST
