@@ -33,7 +33,6 @@ class CVDListView(LoginRequiredMixin, generic.ListView):
 
 class CVDDetailView(LoginRequiredMixin, generic.DetailView):
     model = CvdReport
-    # Update with your actual detail template
     template_name = 'cvd_service/cvd_detail.html'
 
 
