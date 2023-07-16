@@ -1,6 +1,6 @@
 {% extends 'base_app/base.html' %} {% block title %}Create CVD{% endblock %}
 {%block content %}
-<div class="flex flex-col items-center justify-center h-screen bg-gray-100">
+<div class="flex flex-col items-center h-screen bg-gray-100">
   <h1 class="text-4xl font-bold mb-4">Create CVD</h1>
 
   <form
@@ -139,8 +139,8 @@
       ></textarea>
     </div>
     <div class="mb-4">
-      <input type="checkbox" id="agree_cvd" name="agree_cvd" required />
-      <label for="agree_cvd"
+      <input type="checkbox" id="id_agree_cvd" name="agree_cvd" required />
+      <label for="id_agree_cvd"
         >I have read and agree to the terms of the CVD policy. (required)</label
       >
     </div>
@@ -164,11 +164,11 @@
       <h2 class="text-lg font-bold mb-2">Statement of agreement (required)</h2>
       <input
         type="checkbox"
-        id="agree_statement"
+        id="id_agree_statement"
         name="agree_statement"
         required
       />
-      <label for="agree_statement"
+      <label for="id_agree_statement"
         >Data provided by you may be used for communication in relation to the
         notification you made and for sending a reward if you qualify.</label
       >

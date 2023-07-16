@@ -40,7 +40,7 @@ class CVDCreateView(generic.CreateView):
     fields = ['first_name', 'last_name', 'email', 'phone', 'vulnerability_type',
               'explanation', 'vulnerability_reason', 'domain_or_ip', 'pgp_key']
     template_name = 'cvd_service/create_cvd.html'
-    success_url = reverse_lazy('cvd_service:create_cvd')
+    success_url = reverse_lazy('cvd_service:cvd_list')
 
 
 @require_POST
