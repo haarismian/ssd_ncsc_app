@@ -6,8 +6,7 @@ To begin the installation process, open the code submission.
 Enter the `python3 manage.py runserver` command to import the Django code module. Next, navigate to a web browser and enter the URL localhost:8000 to run the contents of the directory.
 
 The home page of the app will now be displayed on the screen.
-
-
+![image](https://github.com/haarismian/ssd_ncsc_app/assets/13083798/3b424159-bd35-435d-a5f8-4d4fa87413a5)
 
 # Functional Requirements
 All functional requirements were implemented in the system as designed. Please see a list below:
@@ -16,12 +15,13 @@ All functional requirements were implemented in the system as designed. Please s
 Users who have not logged in are only able to perform two actions: view active cases and submit a CVD Report.
 #### 1. View Active Cases
 To view a current list of active cases, click the `View All Cases` button on the home screen. Under actions, click the `View Case` button to see the details of any given case (Author, Case ID, Title, and Case Description).
-
+![image](https://github.com/haarismian/ssd_ncsc_app/assets/13083798/1dd6297a-8f90-4def-8ed2-cbfd3f41c28c)
 
 #### 2. Submit CVD Report
 To submit a CVD report, click on the `Submit CVD Report` button on the home page. Fill out the form with your personal details and the details of the vulnerability. Click the `Create` button.
+![image](https://github.com/haarismian/ssd_ncsc_app/assets/13083798/69456b0b-b610-42e6-ad9c-2c3536f6f8a7)
 
-### Users
+### Authenticated Officer Users
 Registered users are able to perform more actions than non-users.
 
 Default Username  | Default Password
@@ -34,8 +34,15 @@ Click the login link on the home page or the login tab on the navigation bar. En
 On the home page, click the `View List of Currently Active Cases` button. The Case List Page will display a list of currently active cases with the title and ID. To view a case in more detail, click the `View Case` button.
 #### 3. Delete Cases
 From the Case List page, click the blue `Create New Case` button at the top of the page. Fill out the form with your personal details as well as the vulnerability details. Click the `Submit` button.
-#### 4. View all CVDs
+
+
+![image](https://github.com/haarismian/ssd_ncsc_app/assets/13083798/ae21f827-a8b0-4f34-aebf-d05c3d1209d8)
+
+#### 4. View all CVDs, delete CVDs, view single CVD in detail
 To view the CVD Report List, click the `Go to CVD page` button on the home page. This will allow you to view the details of all CVD Reports that have been submitted, as well as an option to view, delete, or create CVDs.
+
+![image](https://github.com/haarismian/ssd_ncsc_app/assets/13083798/2f62c329-da83-47e5-8c96-95f5e50445c9)
+
 
 ### Create New Users
 
@@ -48,7 +55,15 @@ Our application also allows for the creation of new users, which can only be don
 
 # Security Feautres:
 1. Automatic session timeout - 5 minutes of inactivity.
-2. Role-based authentication
+2. Role-based authentication 
+3. Logging and Monitoring - All API calls, DB queries, and warnings such as failed login attempt
+4. Automated logging response - for example block IP after multiple failed login attempts
+5. XSS, CSRF, and SQL injection projection
+6. PEP8 Style guide linter
+7. Hashed and encrypted passwords and personally identifying information
+8. Cookie consent
+9. Form validations
+
 
 # Changes from the design document
 * Frontend is no longer in React. Instead, the application is fullstack in Django and uses Django template language as the frontend.
