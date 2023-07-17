@@ -1,7 +1,9 @@
 # Instructions for Installation and Execution
 
 # Installation
-To begin the installation process, open the code submission.
+1. Ensure you have the `Python` programming language installed - if you have python 3 installed you will be using the `python3` command, if you do not, then you will use the `python` command
+2. Ensure you have the `pip` package manager installed by using the command `pip install pip` after python is installed by following the instructions on this page `https://pip.pypa.io/en/stable/installation/`
+2. navigate using the terminal to the installation directory
 
 Enter the `python3 manage.py runserver` command to import the Django code module. Next, navigate to a web browser and enter the URL localhost:8000 to run the contents of the directory.
 
