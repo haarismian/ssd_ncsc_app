@@ -3,9 +3,10 @@
 # Installation
 1. Ensure you have the `Python` programming language installed - if you have python 3 installed you will be using the `python3` command, if you do not, then you will use the `python` command
 2. Ensure you have the `pip` package manager installed by using the command `pip install pip` after python is installed by following the instructions on this page `https://pip.pypa.io/en/stable/installation/`
-2. navigate using the terminal to the installation directory
-
-Enter the `python3 manage.py runserver` command to import the Django code module. Next, navigate to a web browser and enter the URL localhost:8000 to run the contents of the directory.
+3. Using the terminal navigate to the folder of the code submission with the files `manage.py` and `requirements.txt`
+4. Use the command `pip install -r requirements` to install all project dependencies. These dependencies are necessary for the project to run and include things like django-crytography for database encryption or django framework itself. Please see the requirements.txt file for the full details.
+5. Once all dependencies are installed, use the command `python manage.py runserver` or `python3 manage.py runserver` to run the server application and all services.
+6. Next, navigate to a web browser and enter the URL localhost:8000 to run the application
 
 The home page of the app will now be displayed on the screen.
 ![image](https://github.com/haarismian/ssd_ncsc_app/assets/13083798/3b424159-bd35-435d-a5f8-4d4fa87413a5)
@@ -55,7 +56,7 @@ ncsc_admin  | ssd_password
 
 Our application also allows for the creation of new users, which can only be done by administrator accounts. Go to the admin portal at **http://localhost:8000/admin**. Enter the administrator username and password. Once logged in, new users can be added by selecting the new user's username and password. Once created, enter the new user's personal information (such as name and email) as well as permissions (such as active, staff, and super user status) and groups. Once the form is filled out completely, click the `Save` button at the bottom of the screen.
 
-# Security Feautres:
+# Security Feautres (See supplemental document for evidence of testing):
 1. Automatic session timeout - 5 minutes of inactivity.
 2. Role-based authentication 
 3. Logging and Monitoring - All API calls, DB queries, and warnings such as failed login attempt
